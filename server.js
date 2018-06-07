@@ -9,6 +9,7 @@ var path = require("path");
 //Axios - promise based library. Similar to jquery ajax method
 var axios = require("axios");
 var cheerio = require("cheerio");
+var request = require("request");
 
 // Require all models
 var db = require("./models");
@@ -25,6 +26,8 @@ require("./config/routes")(router);
 
 //Allows request to go through router middleware
 app.use(router);
+
+mongoose.Promise = Promise;
 
 //Middleware
 
@@ -64,10 +67,30 @@ app.get("/scrape", function(req, res) {
         // console.log(response);
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
-    //   console.log(response.data);
+      console.log(response.data);
 
       // Now, we grab every h3 within an article tag, and do the following:
     $(".extremeHero-postContent h3").each(function(i, element) {
+
+        var articles = {};
+
+        var articleTitle = element.children[0].data;
+        console.log(articleTitle);
+  
+        var articleLink = element.parent.attribs.href;
+        console.log(articleLink);
+  
+        articles.push(`<a href= "${articleLink}">${articleTitle}</a>`);
+
+        // var result = {};
+
+        // result.title = $(this)
+        // .children("a")
+        // .text();
+
+        // result.link = $(this)
+        // .children("a")
+        // .attr("href");
         // console.log("hello");
         // console.log(element);
 
@@ -93,7 +116,7 @@ app.get("/scrape", function(req, res) {
     //            return res.json(err);
     //        });
 
-    // res.send(articles.join("<br>"));
+    res.send(articles.join("<br>"));
 
     });
 
