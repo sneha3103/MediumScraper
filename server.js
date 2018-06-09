@@ -11,8 +11,11 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 var request = require("request");
 
+var Note = require("./models/Note.js");
+var Article = require("./models/Article.js");
+
 // Require all models
-var db = require("./models");
+// var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
 
@@ -61,31 +64,31 @@ mongoose.connect(db,function(error){
 
 
 // A GET route for scraping the Medium.com website
-app.get("/scrape", function(req, res) {
+// app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with request
-    request("https://medium.com/", function (error, response, body) {
+    // request("https://medium.com/", function (error, response, body) {
         // console.log(response);
       // Then, we load that into cheerio and save it to $ for a shorthand selector
-      var $ = cheerio.load(body);
+    //   var $ = cheerio.load(body);
     //   console.log(response.data);
 
-    var articles = [];
+    // var articles = [];
       // Now, we grab every h3 within an article tag, and do the following:
-    $(".extremeHero-postContent h3").each(function(i, element) {
+    // $(".extremeHero-postContent h3").each(function(i, element) {
 
-        var articleTitle = element.children[0].data;
-        console.log("title", articleTitle);
+    //     var articleTitle = element.children[0].data;
+    //     console.log("title", articleTitle);
   
-        var articleLink = element.parent.attribs.href;
-        console.log("link", articleLink);
+    //     var articleLink = element.parent.attribs.href;
+    //     console.log("link", articleLink);
   
-        articles.push(`<a href= "${articleLink}">${articleTitle}</a>`);
-    });
-    
-    res.send(articles.join("<br>"));
+    //     articles.push(`<a href= "${articleLink}">${articleTitle}</a>`);
+    // });
 
-    });
-});
+    // res.send(articles.join("<br>"));
+
+    // });
+// });
 
 
 // Start the server
