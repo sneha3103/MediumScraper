@@ -24,7 +24,7 @@ body {
     margin-bottom: 0;  
 }
 
-.jumbotron {
+.jumbotron  {
     background-image: url("../img/newspaper1.jpg");
     position: relative;
     width: 100%;
@@ -88,13 +88,20 @@ textarea {
 }
 
 body {
-	background-image: url(../img/nyt-newsprint.jpg);
+    /* background-image: url(../img/nyt-newsprint.jpg); */
+    background: #846632bf;
 	background-position: center;
 	font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4 {
-	font-family: 'Roboto Slab', serif;
+    /* font-family: 'Roboto Slab', serif; */
+    font-family: "Rye", cursive;
+}
+
+h3, h4 {
+      font-family: 'Roboto Slab', serif;
+
 }
 
 
